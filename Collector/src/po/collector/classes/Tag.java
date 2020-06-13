@@ -1,9 +1,9 @@
 package po.collector.classes;
 
-public class tag {
+public class Tag {
     private String value;
 
-    public tag(String value)
+    public Tag(String value)
     {
         this.value = value;
     }

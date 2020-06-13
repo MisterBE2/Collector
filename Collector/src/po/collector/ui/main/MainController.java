@@ -1,4 +1,4 @@
-package po.collector;
+package po.collector.ui.main;
 
 public class MainController {
 	

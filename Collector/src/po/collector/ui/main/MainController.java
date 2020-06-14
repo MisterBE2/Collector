@@ -1,28 +1,30 @@
 package po.collector.ui.main;
 
-import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import po.collector.classes.Collection;
-import po.collector.classes.Media;
 import po.collector.classes.Tag;
+import po.collector.classes.files.Files;
+import po.collector.classes.media.Media;
 
 public class MainController {
     private String defaultMediaURL = "C:\\PO";
+
+    private ArrayList<Collection> collections = new ArrayList<>();
+    private ArrayList<Tag> tags = new ArrayList<>();
+    private ArrayList<Media> media = new ArrayList<>();
+
     @FXML
     private Tab tab_collections;
 
@@ -30,7 +32,7 @@ public class MainController {
     private Tab tab_tags;
 
     @FXML
-    private Tab tab_Files;
+    private Tab tab_files;
 
     @FXML
     private Button button_add;
@@ -49,18 +51,20 @@ public class MainController {
 
     @FXML
     void initialize() {
-        System.out.println("init");
-        try (Stream<Path> walk = Files.walk(Paths.get(this.defaultMediaURL))) {
-
-            List<String> result = walk.map(Path::toString).filter(f -> f.endsWith(".jpg")).collect(Collectors.toList());
-
-            result.forEach(System.out::println);
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (tab_collections.isSelected()) {
+            button_add.setText("Add Collection");
         }
 
-        text_field_search.setText("test ttt");
+        Runnable r = new Runnable() {
+            public void run() {
+                media.addAll(Files.loadMedia(defaultMediaURL));
+                for (Media m : media) {
+                    System.out.println(m.getResUrl());
+                }
+            }
+        };
+
+        new Thread(r).start();
     }
 
     @FXML
@@ -74,8 +78,17 @@ public class MainController {
     }
 
     @FXML
-    void tab_on_select(ActionEvent event) {
+    void tab_on_select(Event event) {
 
+        if(button_add != null) {
+            if (tab_collections.isSelected()) {
+                button_add.setText("Add Collection");
+            } else if (tab_files.isSelected()) {
+                button_add.setText("Add Source Folder");
+            } else if (tab_tags.isSelected()) {
+                button_add.setText("Add Tag");
+            }
+        }
     }
 
 

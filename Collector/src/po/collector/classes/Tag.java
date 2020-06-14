@@ -7,8 +7,8 @@ public class Tag {
     {
         this.value = value;
     }
-
-    public Object getValue() { //TODO
-        return null;
+  
+    public String getValue() {
+        return this.value;
     }
 }

@@ -1,4 +1,6 @@
-package po.collector.classes;
+package po.collector.classes.media;
+
+import po.collector.classes.Tag;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -6,6 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 public class Media {
     private String resURL;

@@ -7,4 +7,8 @@ public class Tag {
     {
         this.value = value;
     }
+
+    public String getValue() {
+        return this.value;
+    }
 }

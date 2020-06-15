@@ -1,5 +1,6 @@
 package po.collector.classes.files;
 
+import po.collector.classes.db.entities.FileEntity;
 import po.collector.classes.media.MediaTypes;
 
 import java.io.File;
@@ -30,15 +31,25 @@ public class Files {
         return null;
     }
 
-    public static List<Media> loadMedia(String dir) throws MalformedURLException {
-        List<Media> media = new ArrayList<>();
+    public static List<FileEntity> loadMediaFromFolder(String dir) throws MalformedURLException {
+        List<FileEntity> media = new ArrayList<>();
         List<String> urls = Files.getFilesUrls(dir, MediaTypes.JPG);
         assert urls != null;
         for (String u : urls) {
             u = u.replace("\\", "\\\\");
             System.out.println("loading: " + u);
-            media.add(new Media(new File(u).toURI().toString()));
+            media.add(new FileEntity(new File(u).toURI().toString(), true));
         }
         return media;
+    }
+
+    public static FileEntity loadMedia(String url) throws MalformedURLException {
+        File tmpMedia = new File(url);
+        if (tmpMedia.exists()) {
+            url.replace("\\", "\\\\");
+            System.out.println("loading: " + url);
+            return new FileEntity(tmpMedia.toURI().toString(), true);
+        }
+        return null;
     }
 }

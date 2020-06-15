@@ -49,18 +49,23 @@ public class DirectoryEntity extends Database {
 
     private void getEntityById(int id) {
         Connection con = super.startDbConn();
+
         try {
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery("SELECT PATH, NAME FROM DIRECTORIES WHERE ID = " + id);
+
             while (rs.next()) {
-                this.path = rs.getString("PATH");
+                this.path =  rs.getString("PATH");
                 this.name = rs.getString("NAME");
+
                 System.out.println(this.path);
             }
+
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         try {
             con.close();
         } catch (SQLException ex) {
@@ -70,17 +75,21 @@ public class DirectoryEntity extends Database {
 
     private void getEntityByPath(String url) {
         Connection con = super.startDbConn();
+
         try {
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery("SELECT ID, NAME FROM DIRECTORIES WHERE PATH = '" + getPath() + "'");
+
             while (rs.next()) {
                 setId(rs.getInt("ID"));
                 setName(rs.getString("NAME"));
             }
+
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         try {
             con.close();
         } catch (SQLException ex) {
@@ -91,6 +100,7 @@ public class DirectoryEntity extends Database {
     public boolean save() {
         Connection con = super.startDbConn();
         String sql;
+
         if (getId() == 0) {
             sql = "INSERT INTO DIRECTORIES(PATH, NAME) VALUES('" + getPath() + "', '" + getName() + "')";
             super.execute(sql);
@@ -98,12 +108,14 @@ public class DirectoryEntity extends Database {
             sql = "UPDATE DIRECTORIES SET PATH='" + getPath() + "', NAME='" + getName() + "' WHERE ID = " + getId();
             super.execute(sql);
         }
+
         try {
             con.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
         }
+
         return true;
     }
 
@@ -115,7 +127,7 @@ public class DirectoryEntity extends Database {
         }
     }
 
-    public boolean delete() {
+    public boolean delete(){
         return super.delete(getId(), "DICTIONARY");
     }
 }

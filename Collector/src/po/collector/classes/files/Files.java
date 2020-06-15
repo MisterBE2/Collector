@@ -24,10 +24,12 @@ public class Files {
             result = walk.map(Path::toString).filter(f -> f.endsWith(finalFilterType)).collect(Collectors.toList());
             System.out.println("Found files:");
             result.forEach(System.out::println);
+
             return result;
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return null;
     }
 
@@ -36,7 +38,7 @@ public class Files {
         List<String> urls = Files.getFilesUrls(dir, MediaTypes.JPG);
         assert urls != null;
         for (String u : urls) {
-            u = u.replace("\\", "\\\\");
+            u =  u.replace("\\", "\\\\");
             System.out.println("loading: " + u);
             media.add(new FileEntity(new File(u).toURI().toString(), true));
         }
@@ -45,11 +47,14 @@ public class Files {
 
     public static FileEntity loadMedia(String url) throws MalformedURLException {
         File tmpMedia = new File(url);
-        if (tmpMedia.exists()) {
+
+        if(tmpMedia.exists())
+        {
             url.replace("\\", "\\\\");
             System.out.println("loading: " + url);
             return new FileEntity(tmpMedia.toURI().toString(), true);
         }
+
         return null;
     }
 }

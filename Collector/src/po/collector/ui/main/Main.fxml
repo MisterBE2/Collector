@@ -26,7 +26,7 @@
                 <Button fx:id="button_add" mnemonicParsing="false" onAction="#button_add_on_action" prefHeight="49.0" prefWidth="266.0" text="Add Collections" />
             </children>
         </VBox>
-        <Separator orientation="VERTICAL" prefHeight="200.0" />
+      <Separator orientation="VERTICAL" prefHeight="200.0" />
         <VBox fx:id="vbox_canvas" prefHeight="720.0" prefWidth="1000.0">
             <children>
                 <HBox prefHeight="45.0" prefWidth="398.0" spacing="10.0">
@@ -42,31 +42,31 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                     </padding>
                 </HBox>
-                <Separator prefWidth="200.0" />
-                <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="998.0" spacing="10.0">
-                    <children>
-                        <Label fx:id="label_collection" text="No collection selected">
-                            <font>
-                                <Font size="20.0" />
-                            </font>
-                        </Label>
-                        <Button fx:id="button_clear_collection" mnemonicParsing="false" onMouseClicked="#button_clear_collection_clicked" text="Clear" />
-                    </children>
-                </HBox>
-                <Separator prefWidth="200.0" />
-                <ScrollPane fx:id="canvas" prefHeight="514.0" prefWidth="998.0" />
-                <Separator prefWidth="200.0" />
-                <Pane fx:id="pane_mics" prefHeight="182.0" prefWidth="998.0">
-                    <children>
-                        <Label layoutX="14.0" layoutY="14.0" text="Media name:" />
-                        <Label fx:id="label_media_location" layoutX="103.0" layoutY="31.0" />
-                        <Label layoutX="14.0" layoutY="31.0" text="Media location:" />
-                        <Label fx:id="label_media_name" layoutX="89.0" layoutY="14.0" />
-                        <Label fx:id="label_tags" layoutX="14.0" layoutY="48.0" prefHeight="62.0" prefWidth="975.0" wrapText="true" />
-                        <Button fx:id="button_set_name" layoutX="201.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#button_set_name_on_click" text="Set name" />
-                        <Button fx:id="button_add_tag" layoutX="131.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#button_add_tag_on_click" text="Add tag" />
-                        <Button fx:id="button_add_collection" layoutX="14.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#button_add_to_collection_on_click" text="Add to collection" />
-                    </children></Pane>
+            <Separator prefWidth="200.0" />
+            <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="998.0" spacing="10.0">
+               <children>
+                  <Label fx:id="label_collection" text="No collection selected">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="button_clear_collection" mnemonicParsing="false" onMouseClicked="#button_clear_collection_clicked" text="Clear" />
+               </children>
+            </HBox>
+            <Separator prefWidth="200.0" />
+            <ScrollPane fx:id="canvas" prefHeight="514.0" prefWidth="998.0" />
+            <Separator prefWidth="200.0" />
+            <Pane fx:id="pane_mics" prefHeight="182.0" prefWidth="998.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" text="Media name:" />
+                  <Label fx:id="label_media_location" layoutX="103.0" layoutY="31.0" />
+                  <Label layoutX="14.0" layoutY="31.0" text="Media location:" />
+                  <Label fx:id="label_media_name" layoutX="89.0" layoutY="14.0" />
+                  <Label fx:id="label_tags" layoutX="14.0" layoutY="48.0" prefHeight="62.0" prefWidth="975.0" wrapText="true" />
+                  <Button fx:id="button_set_name" layoutX="201.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#button_set_name_on_click" text="Set name" />
+                  <Button fx:id="button_add_tag" layoutX="131.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#button_add_tag_on_click" text="Add tag" />
+                  <Button fx:id="button_add_collection" layoutX="14.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#button_add_to_collection_on_click" text="Add to collection" />
+               </children></Pane>
             </children>
         </VBox>
     </children>

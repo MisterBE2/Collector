@@ -31,17 +31,21 @@ public class CollectionEntity extends Database {
 
     private void getEntityById(int id) {
         Connection con = super.startDbConn();
+
         try {
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery("SELECT VALUE, DESCRIPTION FROM COLLECTIONS WHERE ID = " + id);
+
             while (rs.next()) {
                 setValue(rs.getString("VALUE"));
                 setDescription(rs.getString("DESCRIPTION"));
             }
+
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         try {
             con.close();
         } catch (SQLException ex) {
@@ -51,17 +55,21 @@ public class CollectionEntity extends Database {
 
     private void getEntityByValue(String value) {
         Connection con = super.startDbConn();
+
         try {
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery("SELECT ID, DESCRIPTION FROM COLLECTIONS WHERE VALUE = '" + getValue() + "'");
+
             while (rs.next()) {
                 setId(rs.getInt("ID"));
                 setDescription(rs.getString("DESCRIPTION"));
             }
+
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         try {
             con.close();
         } catch (SQLException ex) {
@@ -108,38 +116,48 @@ public class CollectionEntity extends Database {
         } else {
             getEntityByValue(getValue());
         }
+
         assoc.clear();
         assoc.addAll(new CollectionsAssociationsManager().getCollectionsAssociations(this));
+
         System.out.println("Collection: " + getValue() + " has assoc:");
-        for (CollectionAssociationEntity cae : assoc) {
+        for (CollectionAssociationEntity cae: assoc) {
             System.out.println("id: " + cae.getId() + ", FILEID: " + cae.getIdMedia());
         }
     }
 
+
     public boolean save() {
         Connection con = super.startDbConn();
         String sql;
+
         if (getValue() != "") {
             sql = "SELECT * FROM COLLECTIONS WHERE VALUE = '" + getValue() + "'";
             boolean isInDb = false;
+
             try {
                 Statement statement = con.createStatement();
                 ResultSet rs = statement.executeQuery(sql);
+
                 isInDb = super.getResultSetCount(rs) > 0;
                 rs.close();
                 statement.close();
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+
             if (getId() == 0 && !isInDb) {
                 sql = "INSERT INTO COLLECTIONS(VALUE, DESCRIPTION) VALUES('" + getValue() + "', '" + getDescription() + "')";
                 super.execute(sql);
                 this.load();
+
             } else {
                 sql = "UPDATE COLLECTIONS SET VALUE='" + getValue() + "', DESCRIPTION='" + getDescription() + "' WHERE ID = " + getId();
                 super.execute(sql);
             }
         }
+
 
         try {
             con.close();
@@ -147,10 +165,12 @@ public class CollectionEntity extends Database {
             ex.printStackTrace();
             return false;
         }
+
         return true;
     }
 
-    public boolean delete() {
+
+    public boolean delete(){
         return super.delete(getId(), "COLLECTIONS");
     }
 }

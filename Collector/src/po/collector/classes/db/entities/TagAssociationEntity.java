@@ -10,7 +10,7 @@ public class TagAssociationEntity extends Database {
     private int idTag;
     private int idMedia;
 
-    public TagAssociationEntity(int id, int idTag, int idMedia) {
+    public TagAssociationEntity(int id, int idTag, int idMedia){
         setId(id);
         setIdTag(idTag);
         setIdMedia(idMedia);
@@ -43,23 +43,28 @@ public class TagAssociationEntity extends Database {
     public boolean save() {
         Connection con = super.startDbConn();
         String sql;
+
         if (getId() == 0) {
             sql = "INSERT INTO TAGSASSOCIATIONS(TAGID, FILEID) VALUES('" + getIdTag() + "', '" + getIdMedia() + "')";
             super.execute(sql);
+
         } else {
             sql = "UPDATE TAGSASSOCIATIONS SET TAGID='" + getIdTag() + "', FILEID='" + getIdMedia() + "' WHERE ID = " + getId();
             super.execute(sql);
         }
+
         try {
             con.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
         }
+
         return true;
     }
 
-    public boolean delete() {
+
+    public boolean delete(){
         return super.delete(getId(), "TAGSASSOCIATIONS");
     }
 }

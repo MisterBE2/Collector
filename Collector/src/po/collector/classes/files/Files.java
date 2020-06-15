@@ -1,12 +1,10 @@
 package po.collector.classes.files;
 
-import po.collector.classes.media.Media;
 import po.collector.classes.media.MediaTypes;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;

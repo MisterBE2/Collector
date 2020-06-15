@@ -1,12 +1,9 @@
 package po.collector.ui.main;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.regex.Pattern;
 
 
 import javafx.event.ActionEvent;
@@ -25,7 +22,6 @@ import javafx.scene.layout.VBox;
 import po.collector.classes.Collection;
 import po.collector.classes.Tag;
 import po.collector.classes.files.Files;
-import po.collector.classes.media.Media;
 import po.collector.classes.media.MediaView;
 
 

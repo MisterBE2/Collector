@@ -25,6 +25,7 @@ import po.collector.classes.db.managers.DirectoriesManager;
 import po.collector.classes.db.managers.TagsManager;
 import po.collector.classes.files.Files;
 import po.collector.classes.media.MediaView;
+import po.collector.classes.media.StatusBarController;
 
 public class MainController {
     private List<DirectoryEntity> dirs = new ArrayList<>();
@@ -73,6 +74,9 @@ public class MainController {
 
     @FXML
     private Label label_media_name;
+
+    @FXML
+    private Label label_status = new StatusBarController();
 
     @FXML
     private TextArea text_area_tags;
@@ -204,7 +208,7 @@ public class MainController {
         for (DirectoryEntity d : dirs) {
 
             try {
-                media.addAll(Files.loadMediaFromFolder(d.getPath()));
+                media.addAll(Files.loadMediaFromFolder(d.getPath(), false));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -293,6 +297,12 @@ public class MainController {
                 DirectoryEntity de = new DirectoryEntity(0, path, "");
                 de.save();
 
+                try {
+                    Files.loadMediaFromFolder(de.getPath(), true);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+
                 discoverDirectories();
                 displayDirectories();
 
@@ -322,7 +332,7 @@ public class MainController {
     void text_field_search_on_key_release(KeyEvent event) {
 
         if (event.getCode() == KeyCode.ENTER) {
-            if (searchCriteria.length() <= 3) {
+            if (searchCriteria.length() == 0) {
                 displayMedia(media);
                 return;
             }

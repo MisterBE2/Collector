@@ -103,7 +103,7 @@ public class CollectionEntity extends Database {
 
     public boolean hasMedia(FileEntity fileEntity) {
         for (CollectionAssociationEntity cae : assoc) {
-            if (cae.getIdMedia() == fileEntity.getId()) {
+            if (cae.getIdMedia() == fileEntity.getId() && fileEntity.getId() > 0) {
                 return true;
             }
         }

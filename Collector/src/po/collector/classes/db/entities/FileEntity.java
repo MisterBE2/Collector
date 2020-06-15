@@ -19,11 +19,12 @@ public class FileEntity extends Database {
     public FileEntity() {
     }
 
-    public FileEntity(String path, boolean save) {
+    public FileEntity(String path, boolean saveonLoad) {
         setPath(path);
 
-        if (save) {
+        if (saveonLoad) {
             save();
+            load();
         }
     }
 
@@ -122,32 +123,21 @@ public class FileEntity extends Database {
         Connection con = super.startDbConn();
         String sql;
 
-        if (getName() != "") {
-            sql = "SELECT * FROM TAGS WHERE VALUE = '" + getName() + "'";
-            boolean isInDb = false;
 
+        if (getId() == 0) {
+            sql = "INSERT INTO FILES(PATH, NAME) VALUES('" + getPath() + "', '" + getName() + "')";
 
-            try {
-                Statement statement = con.createStatement();
-                ResultSet rs = statement.executeQuery(sql);
+            System.out.println("FileEntity INS: " + sql);
 
-                isInDb = super.getResultSetCount(rs) > 0;
-                rs.close();
-                statement.close();
+            super.execute(sql);
+        } else {
+            sql = "UPDATE FILES SET PATH='" + getPath() + "', NAME='" + getName() + "' WHERE ID = " + getId();
 
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            System.out.println("FileEntity UPD: " + sql);
 
-
-            if (getId() == 0 && !isInDb) {
-                sql = "INSERT INTO FILES(PATH, NAME) VALUES('" + getPath() + "', '" + getName() + "')";
-                super.execute(sql);
-            } else {
-                sql = "UPDATE FILES SET PATH='" + getPath() + "', NAME='" + getName() + "' WHERE ID = " + getId();
-                super.execute(sql);
-            }
+            super.execute(sql);
         }
+
 
         try {
             con.close();

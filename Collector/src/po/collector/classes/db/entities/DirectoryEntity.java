@@ -103,9 +103,15 @@ public class DirectoryEntity extends Database {
 
         if (getId() == 0) {
             sql = "INSERT INTO DIRECTORIES(PATH, NAME) VALUES('" + getPath() + "', '" + getName() + "')";
+
+            System.out.println("FileEntity INS: " + sql);
+
             super.execute(sql);
         } else {
             sql = "UPDATE DIRECTORIES SET PATH='" + getPath() + "', NAME='" + getName() + "' WHERE ID = " + getId();
+
+            System.out.println("FileEntity UPD: " + sql);
+
             super.execute(sql);
         }
 

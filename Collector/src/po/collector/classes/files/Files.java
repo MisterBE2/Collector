@@ -33,14 +33,14 @@ public class Files {
         return null;
     }
 
-    public static List<FileEntity> loadMediaFromFolder(String dir) throws MalformedURLException {
+    public static List<FileEntity> loadMediaFromFolder(String dir, boolean saveOnLoad) throws MalformedURLException {
         List<FileEntity> media = new ArrayList<>();
         List<String> urls = Files.getFilesUrls(dir, MediaTypes.JPG);
         assert urls != null;
         for (String u : urls) {
             u =  u.replace("\\", "\\\\");
             System.out.println("loading: " + u);
-            media.add(new FileEntity(new File(u).toURI().toString(), true));
+            media.add(new FileEntity(new File(u).toURI().toString(), saveOnLoad));
         }
         return media;
     }
@@ -52,7 +52,7 @@ public class Files {
         {
             url.replace("\\", "\\\\");
             System.out.println("loading: " + url);
-            return new FileEntity(tmpMedia.toURI().toString(), true);
+            return new FileEntity(tmpMedia.toURI().toString(), false);
         }
 
         return null;

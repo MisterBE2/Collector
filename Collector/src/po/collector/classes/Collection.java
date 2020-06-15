@@ -1,7 +1,5 @@
 package po.collector.classes;
 
-import po.collector.classes.media.Media;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 

@@ -75,7 +75,6 @@ public class MainController {
             button_add.setText("Add Collection");
         }
 
-
         List<HBox> hb = new ArrayList<>();
         VBox vb = new VBox();
         vb.setSpacing(5);
